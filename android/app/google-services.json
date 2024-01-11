@@ -1,0 +1,82 @@
+{
+  "project_info": {
+    "project_number": "367424573764",
+    "project_id": "inspecao-de-seguranca",
+    "storage_bucket": "inspecao-de-seguranca.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:367424573764:android:c636c4181d7f5fca0a8711",
+        "android_client_info": {
+          "package_name": "com.tmsistemas.inspecao_seguranca"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "367424573764-n2ldgh31ngkib9snv476o641cf55ofo2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA3XhWRU2BPSf86KJ0NHp6K7Wb10C-UcDE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "367424573764-n2ldgh31ngkib9snv476o641cf55ofo2.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "367424573764-f5im16bbl4l6ob67t13m4uo15gjl1lnd.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.tmsistemas.inspecao-seguranca-empresas"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:367424573764:android:0d31a39373aa9bdb0a8711",
+        "android_client_info": {
+          "package_name": "com.tmsistemas.inspecao_seguranca_empresas"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "367424573764-n2ldgh31ngkib9snv476o641cf55ofo2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA3XhWRU2BPSf86KJ0NHp6K7Wb10C-UcDE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "367424573764-n2ldgh31ngkib9snv476o641cf55ofo2.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "367424573764-f5im16bbl4l6ob67t13m4uo15gjl1lnd.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.tmsistemas.inspecao-seguranca-empresas"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

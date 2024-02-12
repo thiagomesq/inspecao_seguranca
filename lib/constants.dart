@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 
 const Map<int, Color> color = {
-  50:Color.fromRGBO(117,182,49, .1),
-  100:Color.fromRGBO(117,182,49, .2),
-  200:Color.fromRGBO(117,182,49, .3),
-  300:Color.fromRGBO(117,182,49, .4),
-  400:Color.fromRGBO(117,182,49, .5),
-  500:Color.fromRGBO(117,182,49, .6),
-  600:Color.fromRGBO(117,182,49, .7),
-  700:Color.fromRGBO(117,182,49, .8),
-  800:Color.fromRGBO(117,182,49, .9),
-  900:Color.fromRGBO(117,182,49, 1),
+  50: Color.fromRGBO(146, 209, 79, .1),
+  100: Color.fromRGBO(146, 209, 79, .2),
+  200: Color.fromRGBO(146, 209, 79, .3),
+  300: Color.fromRGBO(146, 209, 79, .4),
+  400: Color.fromRGBO(146, 209, 79, .5),
+  500: Color.fromRGBO(146, 209, 79, .6),
+  600: Color.fromRGBO(146, 209, 79, .7),
+  700: Color.fromRGBO(146, 209, 79, .8),
+  800: Color.fromRGBO(146, 209, 79, .9),
+  900: Color.fromRGBO(146, 209, 79, 1),
 };
 const emflorMaterialGreen = MaterialColor(0xff026f2b, color);
 const emflorSilver = Color(0xffc0c0c0);

@@ -149,7 +149,7 @@ class InspecaoCard extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20),
             side: BorderSide(
-              color: theme.colorScheme.primary,
+              color: theme.colorScheme.secondary,
               width: 2,
             ),
           ),
@@ -172,7 +172,7 @@ class InspecaoCard extends StatelessWidget {
             subtitle: Text(
               inspecao.descricao ?? '',
               style: theme.textTheme.bodySmall!.copyWith(
-                color: theme.colorScheme.secondary,
+                color: theme.colorScheme.primary,
               ),
             ),
             trailing: ISFutureButton(

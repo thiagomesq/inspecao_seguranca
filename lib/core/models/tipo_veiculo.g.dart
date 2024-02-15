@@ -7,9 +7,8 @@ part of 'tipo_veiculo.dart';
 // **************************************************************************
 
 TipoVeiculo _$TipoVeiculoFromJson(Map<String, dynamic> json) => TipoVeiculo(
-      id: json['id'] as String?,
       nome: json['nome'] as String?,
-    );
+    )..id = json['id'] as String?;
 
 Map<String, dynamic> _$TipoVeiculoToJson(TipoVeiculo instance) =>
     <String, dynamic>{

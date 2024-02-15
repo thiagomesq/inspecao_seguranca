@@ -51,9 +51,14 @@ class SplashPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Center(
-                  child: Image.asset(
-                    'assets/images/logo_ei.png',
-                    fit: BoxFit.contain,
+                  child: Hero(
+                    tag: 'logo',
+                    child: Image.asset(
+                      'assets/images/logo_ei.png',
+                      width: 204.18,
+                      height: 200,
+                      fit: BoxFit.contain,
+                    ),
                   ),
                 ),
               ],

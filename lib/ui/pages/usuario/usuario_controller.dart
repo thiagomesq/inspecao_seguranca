@@ -3,7 +3,6 @@ import 'package:inspecao_seguranca/core/models/empresa.dart';
 import 'package:inspecao_seguranca/core/models/is_usuario.dart';
 import 'package:inspecao_seguranca/core/models/plataforma.dart';
 import 'package:inspecao_seguranca/infra/http/services/auth_service.dart';
-import 'package:inspecao_seguranca/infra/http/services/empresa_service.dart';
 import 'package:inspecao_seguranca/infra/http/services/user_service.dart';
 import 'package:inspecao_seguranca/ui/shared/controller_base/controller_base.dart';
 import 'package:inspecao_seguranca/ui/stores/empresa_store.dart';

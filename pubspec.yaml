@@ -36,7 +36,6 @@ dependencies:
   flutter_typeahead: ^5.0.2
   syncfusion_flutter_xlsio: ^24.1.45
   open_file: ^3.2.1
-  flutter_login: ^5.0.0
   font_awesome_flutter: ^10.6.0
   shared_preferences: ^2.2.2
   firebase_app_check: ^0.2.1+8

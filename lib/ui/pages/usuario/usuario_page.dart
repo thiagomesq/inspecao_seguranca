@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get_it/get_it.dart';
-import 'package:inspecao_seguranca/core/models/empresa.dart';
 import 'package:inspecao_seguranca/core/models/plataforma.dart';
 import 'package:inspecao_seguranca/ui/pages/home/home_page.dart';
 import 'package:inspecao_seguranca/ui/pages/usuario/usuario_controller.dart';
@@ -10,7 +9,6 @@ import 'package:inspecao_seguranca/ui/shared/is_app_bar.dart';
 import 'package:inspecao_seguranca/ui/shared/is_fetch.dart';
 import 'package:inspecao_seguranca/ui/shared/is_future_button.dart';
 import 'package:inspecao_seguranca/ui/shared/is_text_field.dart';
-import 'package:inspecao_seguranca/ui/shared/is_type_ahead_field.dart';
 
 class UsuarioPage extends StatelessWidget {
   static const routeName = '/usuario';

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
+import 'package:inspecao_seguranca/core/enums/user_type.dart';
+import 'package:inspecao_seguranca/core/models/plataforma.dart';
+import 'package:inspecao_seguranca/ui/pages/cadastros/cadastros_page.dart';
 import 'package:inspecao_seguranca/ui/pages/home/home_controller.dart';
 import 'package:inspecao_seguranca/ui/pages/home/part/is_bottom_navigation_bar.dart';
 import 'package:inspecao_seguranca/ui/shared/controller_provider.dart';
@@ -17,6 +20,8 @@ class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
   final _screenOptions = <Widget>[
     const WelcomePage(),
+    const CadastrosPage(),
+    const WelcomePage(),
     const WelcomePage(),
   ];
   void _onItemTapped(int index) {
@@ -33,19 +38,31 @@ class _HomePageState extends State<HomePage> {
       ),
       builder: (context, controller) {
         return Scaffold(
-          appBar: const ISAppBar(),
+          appBar: !Plataforma.isWeb ? const ISAppBar() : null,
           body: _screenOptions.elementAt(_selectedIndex),
           bottomNavigationBar: ISBottomNavigationBar(
-            items: const [
-              BottomNavigationBarItem(
+            items: [
+              const BottomNavigationBarItem(
                 icon: Icon(Icons.home_outlined),
                 activeIcon: Icon(Icons.home),
                 label: 'Home',
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.home_outlined),
-                activeIcon: Icon(Icons.home),
-                label: 'Home',
+                icon: const Icon(Icons.add_circle_outline),
+                activeIcon: const Icon(Icons.add_circle),
+                label: controller.usuario.type == UserType.user
+                    ? 'Listagens'
+                    : 'Cadastros',
+              ),
+              const BottomNavigationBarItem(
+                icon: Icon(Icons.list_alt_outlined),
+                activeIcon: Icon(Icons.list_alt),
+                label: 'Inspeções',
+              ),
+              const BottomNavigationBarItem(
+                icon: Icon(Icons.settings_outlined),
+                activeIcon: Icon(Icons.settings),
+                label: 'Configurações',
               ),
             ],
             currentIndex: _selectedIndex,
@@ -72,13 +89,18 @@ class WelcomePage extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           Center(
-            child: Image.asset(
-              'assets/images/logo_ei.png',
-              fit: BoxFit.contain,
+            child: Hero(
+              tag: 'logo',
+              child: Image.asset(
+                'assets/images/logo_ei.png',
+                width: 204.18,
+                height: 200,
+                fit: BoxFit.contain,
+              ),
             ),
           ),
           Text(
-            'Bem vindo, ${controller.usuario.username}!',
+            'Bem vindo(a), ${controller.usuario.username}',
             style: Theme.of(context).textTheme.titleLarge,
             textAlign: TextAlign.center,
           ),

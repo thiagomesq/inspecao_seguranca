@@ -9,10 +9,6 @@ class ISAppBar extends StatelessWidget implements PreferredSizeWidget {
       centerTitle: true,
       backgroundColor: Theme.of(context).colorScheme.tertiary,
       elevation: 15,
-      title: Image.asset(
-        'assets/images/escrita.png',
-        height: 40,
-      ),
     );
   }
 

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:inspecao_seguranca/ui/pages/cadastros/inspecao/add_edit/add_edit_page.dart';
+import 'package:inspecao_seguranca/ui/pages/cadastros/inspecao/inspecao_page.dart';
 import 'package:inspecao_seguranca/ui/pages/empresa/empresa_page.dart';
 import 'package:inspecao_seguranca/ui/pages/home/home_page.dart';
 import 'package:inspecao_seguranca/ui/pages/login/login_page.dart';
@@ -11,4 +13,6 @@ Map<String, WidgetBuilder> routes = <String, WidgetBuilder>{
   EmpresaPage.routeName: (_) => const EmpresaPage(),
   UsuarioPage.routeName: (_) => const UsuarioPage(),
   HomePage.routeName: (_) => const HomePage(),
+  InspecaoPage.routeName: (_) => const InspecaoPage(),
+  AddEditInspecaoPage.routeName: (_) => const AddEditInspecaoPage(),
 };

@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:uuid/uuid.dart';
 
 part 'questao.g.dart';
 
@@ -7,9 +8,11 @@ class Questao {
   String? id;
   int? ordem;
   String? nome;
-  String? questaoGrupo;
+  List<String>? inspecoes;
+  List<String>? tipoVeiculos;
 
-  Questao({this.id, this.ordem, this.nome, this.questaoGrupo});
+  Questao({this.ordem, this.nome, this.inspecoes, this.tipoVeiculos})
+      : id = const Uuid().v4();
 
   factory Questao.fromJson(Map<String, dynamic> json) =>
       _$QuestaoFromJson(json);

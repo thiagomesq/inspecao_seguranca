@@ -3,9 +3,9 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get_it/get_it.dart';
 import 'package:inspecao_seguranca/core/models/is_usuario.dart';
 import 'package:inspecao_seguranca/core/models/plataforma.dart';
+import 'package:inspecao_seguranca/ui/pages/empresa/empresa_page.dart';
 import 'package:inspecao_seguranca/ui/pages/home/home_page.dart';
 import 'package:inspecao_seguranca/ui/pages/login/login_controller.dart';
-import 'package:inspecao_seguranca/ui/pages/usuario/usuario_page.dart';
 import 'package:inspecao_seguranca/ui/shared/controller_provider.dart';
 import 'package:inspecao_seguranca/ui/shared/is_future_button.dart';
 import 'package:inspecao_seguranca/ui/shared/is_text_field.dart';
@@ -17,11 +17,8 @@ class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
 
   void onValidatedCode(BuildContext context, ISUsuario? usuario) {
-    if (usuario == null) {
-      if (Plataforma.isWeb) {
-      } else {
-        Navigator.of(context).pushReplacementNamed(UsuarioPage.routeName);
-      }
+    if (usuario!.id == null) {
+      Navigator.of(context).pushReplacementNamed(EmpresaPage.routeName);
     } else {
       Navigator.of(context).pushReplacementNamed(HomePage.routeName);
     }
@@ -32,6 +29,8 @@ class LoginPage extends StatelessWidget {
     double width = MediaQuery.of(context).size.width;
     return ControllerScope(
       create: (_) => LoginController(
+        GetIt.I(),
+        GetIt.I(),
         GetIt.I(),
         GetIt.I(),
         GetIt.I(),
@@ -55,11 +54,14 @@ class LoginPage extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Image.asset(
-                  'assets/images/logo_ei.png',
-                  width: 183.9954,
-                  height: 133.33,
-                  fit: BoxFit.contain,
+                Hero(
+                  tag: 'logo',
+                  child: Image.asset(
+                    'assets/images/logo_ei.png',
+                    width: 174.3,
+                    height: 170.8,
+                    fit: BoxFit.contain,
+                  ),
                 ),
                 const SizedBox(height: 16),
                 Observer(

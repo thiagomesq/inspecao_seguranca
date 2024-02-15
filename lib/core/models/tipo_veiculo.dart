@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:uuid/uuid.dart';
 
 part 'tipo_veiculo.g.dart';
 
@@ -7,7 +8,7 @@ class TipoVeiculo {
   String? id;
   String? nome;
 
-  TipoVeiculo({this.id, this.nome});
+  TipoVeiculo({this.nome}) : id = const Uuid().v4();
 
   factory TipoVeiculo.fromJson(Map<String, dynamic> json) =>
       _$TipoVeiculoFromJson(json);

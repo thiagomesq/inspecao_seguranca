@@ -3,6 +3,7 @@ import 'package:inspecao_seguranca/infra/http/services/auth_service.dart';
 import 'package:inspecao_seguranca/infra/http/services/empresa_service.dart';
 import 'package:inspecao_seguranca/infra/http/services/firebase_service.dart';
 import 'package:inspecao_seguranca/infra/http/services/firestore_service.dart';
+import 'package:inspecao_seguranca/infra/http/services/inspecao_service.dart';
 import 'package:inspecao_seguranca/infra/http/services/questoes_service.dart';
 import 'package:inspecao_seguranca/infra/http/services/user_service.dart';
 import 'package:inspecao_seguranca/ui/stores/cadastro_inspecao_store.dart';
@@ -33,4 +34,5 @@ void configureFirestoreServices() {
   i.registerLazySingleton(() => UserService(i()));
   i.registerLazySingleton(() => EmpresaService(i()));
   i.registerLazySingleton(() => QuestoesService(i()));
+  i.registerLazySingleton(() => InspecaoService(i()));
 }

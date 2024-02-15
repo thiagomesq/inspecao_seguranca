@@ -16,10 +16,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: theme,
       locale: const Locale('pt', 'BR'),
-      initialRoute: SplashPage.routeName,
+      theme: theme,
       routes: routes,
+      initialRoute: SplashPage.routeName,
     );
   }
 }

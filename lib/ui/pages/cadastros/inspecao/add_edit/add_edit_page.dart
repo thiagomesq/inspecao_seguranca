@@ -24,7 +24,7 @@ class AddEditInspecaoPage extends StatelessWidget {
       ),
       builder: (context, controller) {
         return Scaffold(
-          appBar: !isWeb ? const ISAppBar() : null,
+          appBar: const ISAppBar(),
           body: Container(
             padding: EdgeInsets.symmetric(
               horizontal: isWeb ? width * 0.3 : 20,
@@ -36,7 +36,7 @@ class AddEditInspecaoPage extends StatelessWidget {
             child: Observer(
               builder: (_) {
                 return Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Text(
                       '${controller.inspecao == null ? 'Nova' : 'Edição de'} Inspeção',

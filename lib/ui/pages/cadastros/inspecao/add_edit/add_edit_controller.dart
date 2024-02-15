@@ -43,7 +43,12 @@ abstract class AddEditInspecaoControllerBase extends ControllerBase with Store {
 
   @action
   Future<void> save() async {
-    inspecao ??= Inspecao(nome: nome, descricao: descricao);
+    if (inspecao == null) {
+      inspecao = Inspecao(nome: nome, descricao: descricao);
+    } else {
+      inspecao!.nome = nome;
+      inspecao!.descricao = descricao;
+    }
     await _inspecaoService.saveInspecao(inspecao!);
   }
 }

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:inspecao_seguranca/core/enums/user_type.dart';
-import 'package:inspecao_seguranca/core/models/plataforma.dart';
 import 'package:inspecao_seguranca/ui/pages/cadastros/cadastros_page.dart';
 import 'package:inspecao_seguranca/ui/pages/home/home_controller.dart';
 import 'package:inspecao_seguranca/ui/pages/home/part/is_bottom_navigation_bar.dart';
@@ -38,7 +37,7 @@ class _HomePageState extends State<HomePage> {
       ),
       builder: (context, controller) {
         return Scaffold(
-          appBar: !Plataforma.isWeb ? const ISAppBar() : null,
+          appBar: const ISAppBar(),
           body: _screenOptions.elementAt(_selectedIndex),
           bottomNavigationBar: ISBottomNavigationBar(
             items: [

@@ -4,6 +4,7 @@ import 'package:inspecao_seguranca/core/enums/user_type.dart';
 import 'package:inspecao_seguranca/core/models/plataforma.dart';
 import 'package:inspecao_seguranca/ui/pages/cadastros/cadastros_controller.dart';
 import 'package:inspecao_seguranca/ui/pages/cadastros/inspecao/inspecao_page.dart';
+import 'package:inspecao_seguranca/ui/pages/cadastros/tipo_veiculo/tipo_veiculo_page.dart';
 import 'package:inspecao_seguranca/ui/shared/controller_provider.dart';
 import 'package:inspecao_seguranca/ui/shared/is_screen_button.dart';
 
@@ -53,7 +54,7 @@ class CadastrosPage extends StatelessWidget {
                     !isUser
                         ? const ISScreenButton(
                             texto: 'Tipo de Veículo',
-                            rota: '/cadastros/tipo_veiculo',
+                            rota: TipoVeiculoPage.routeName,
                           )
                         : const SizedBox.shrink(),
                     !isUser

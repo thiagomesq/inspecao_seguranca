@@ -27,7 +27,7 @@ abstract class TipoVeiculoControllerBase extends ControllerBase with Store {
 
   @action
   Future<void> fetch() async {
-    tipoVeiculosLoading = _tipoVeiculoService.getTipoVeiculos().asObservable();
+    tipoVeiculosLoading = _tipoVeiculoService.getTiposVeiculo().asObservable();
     tipoVeiculos = await tipoVeiculosLoading;
   }
 

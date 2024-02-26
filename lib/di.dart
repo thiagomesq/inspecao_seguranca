@@ -4,10 +4,11 @@ import 'package:inspecao_seguranca/infra/http/services/empresa_service.dart';
 import 'package:inspecao_seguranca/infra/http/services/firebase_service.dart';
 import 'package:inspecao_seguranca/infra/http/services/firestore_service.dart';
 import 'package:inspecao_seguranca/infra/http/services/inspecao_service.dart';
-import 'package:inspecao_seguranca/infra/http/services/questoes_service.dart';
+import 'package:inspecao_seguranca/infra/http/services/questao_service.dart';
 import 'package:inspecao_seguranca/infra/http/services/tipo_veiculo_service.dart';
 import 'package:inspecao_seguranca/infra/http/services/user_service.dart';
 import 'package:inspecao_seguranca/ui/stores/cadastro_inspecao_store.dart';
+import 'package:inspecao_seguranca/ui/stores/cadastro_questao_store.dart';
 import 'package:inspecao_seguranca/ui/stores/cadastro_tipo_veiculo_store.dart';
 import 'package:inspecao_seguranca/ui/stores/empresa_store.dart';
 import 'package:inspecao_seguranca/ui/stores/questoes_store.dart';
@@ -29,6 +30,7 @@ Future<void> configureDI() async {
   i.registerLazySingleton<CadastroTipoVeiculoStore>(
     () => CadastroTipoVeiculoStore(),
   );
+  i.registerLazySingleton<CadastroQuestaoStore>(() => CadastroQuestaoStore());
 
   configureFirestoreServices();
 
@@ -38,7 +40,7 @@ Future<void> configureDI() async {
 void configureFirestoreServices() {
   i.registerLazySingleton(() => UserService(i()));
   i.registerLazySingleton(() => EmpresaService(i()));
-  i.registerLazySingleton(() => QuestoesService(i()));
+  i.registerLazySingleton(() => QuestaoService(i()));
   i.registerLazySingleton(() => InspecaoService(i()));
   i.registerLazySingleton(() => TipoVeiculoService(i()));
 }

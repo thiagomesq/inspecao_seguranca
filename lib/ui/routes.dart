@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:inspecao_seguranca/ui/pages/cadastros/inspecao/add_edit/add_edit_page.dart';
 import 'package:inspecao_seguranca/ui/pages/cadastros/inspecao/inspecao_page.dart';
+import 'package:inspecao_seguranca/ui/pages/cadastros/questao/add_edit/add_edit_page.dart';
+import 'package:inspecao_seguranca/ui/pages/cadastros/questao/questao_page.dart';
 import 'package:inspecao_seguranca/ui/pages/cadastros/tipo_veiculo/add_edit/add_edit_page.dart';
 import 'package:inspecao_seguranca/ui/pages/cadastros/tipo_veiculo/tipo_veiculo_page.dart';
 import 'package:inspecao_seguranca/ui/pages/empresa/empresa_page.dart';
@@ -19,4 +21,6 @@ Map<String, WidgetBuilder> routes = <String, WidgetBuilder>{
   AddEditInspecaoPage.routeName: (_) => const AddEditInspecaoPage(),
   TipoVeiculoPage.routeName: (_) => const TipoVeiculoPage(),
   AddEditTipoVeiculoPage.routeName: (_) => const AddEditTipoVeiculoPage(),
+  QuestaoPage.routeName: (_) => const QuestaoPage(),
+  AddEditQuestaoPage.routeName: (_) => const AddEditQuestaoPage(),
 };

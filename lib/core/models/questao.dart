@@ -6,13 +6,10 @@ part 'questao.g.dart';
 @JsonSerializable()
 class Questao {
   String? id;
-  int? ordem;
-  String? nome;
-  List<String>? inspecoes;
-  List<String>? tipoVeiculos;
+  String? titulo;
+  List<String>? tiposVeiculo;
 
-  Questao({this.ordem, this.nome, this.inspecoes, this.tipoVeiculos})
-      : id = const Uuid().v4();
+  Questao({this.titulo, this.tiposVeiculo}) : id = const Uuid().v4();
 
   factory Questao.fromJson(Map<String, dynamic> json) =>
       _$QuestaoFromJson(json);

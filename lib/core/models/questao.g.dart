@@ -7,20 +7,14 @@ part of 'questao.dart';
 // **************************************************************************
 
 Questao _$QuestaoFromJson(Map<String, dynamic> json) => Questao(
-      ordem: json['ordem'] as int?,
-      nome: json['nome'] as String?,
-      inspecoes: (json['inspecoes'] as List<dynamic>?)
-          ?.map((e) => e as String)
-          .toList(),
-      tipoVeiculos: (json['tipoVeiculos'] as List<dynamic>?)
+      titulo: json['titulo'] as String?,
+      tiposVeiculo: (json['tiposVeiculo'] as List<dynamic>?)
           ?.map((e) => e as String)
           .toList(),
     )..id = json['id'] as String?;
 
 Map<String, dynamic> _$QuestaoToJson(Questao instance) => <String, dynamic>{
       'id': instance.id,
-      'ordem': instance.ordem,
-      'nome': instance.nome,
-      'inspecoes': instance.inspecoes,
-      'tipoVeiculos': instance.tipoVeiculos,
+      'titulo': instance.titulo,
+      'tiposVeiculo': instance.tiposVeiculo,
     };

@@ -13,7 +13,7 @@ class TipoVeiculoService {
     return TipoVeiculo.fromJson(doc);
   }
 
-  Future<ObservableList<TipoVeiculo>> getTipoVeiculos() async {
+  Future<ObservableList<TipoVeiculo>> getTiposVeiculo() async {
     final list = await _firestoreService.getData(collection);
     return list.map((doc) => TipoVeiculo.fromJson(doc)).toList().asObservable();
   }

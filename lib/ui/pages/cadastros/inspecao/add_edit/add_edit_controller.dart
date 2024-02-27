@@ -1,5 +1,8 @@
 import 'package:inspecao_seguranca/core/models/inspecao.dart';
+import 'package:inspecao_seguranca/core/models/inspecao_questao.dart';
+import 'package:inspecao_seguranca/core/models/questao.dart';
 import 'package:inspecao_seguranca/infra/http/services/inspecao_service.dart';
+import 'package:inspecao_seguranca/infra/http/services/questao_service.dart';
 import 'package:inspecao_seguranca/ui/shared/controller_base/controller_base.dart';
 import 'package:inspecao_seguranca/ui/stores/cadastro_inspecao_store.dart';
 import 'package:mobx/mobx.dart';
@@ -11,14 +14,23 @@ class AddEditInspecaoController = AddEditInspecaoControllerBase
 
 abstract class AddEditInspecaoControllerBase extends ControllerBase with Store {
   final InspecaoService _inspecaoService;
+  final QuestaoService _questaoService;
   final CadastroInspecaoStore _cadastroInspecaoStore;
 
   AddEditInspecaoControllerBase(
     this._inspecaoService,
+    this._questaoService,
     this._cadastroInspecaoStore,
   ) {
     fetch();
   }
+
+  @observable
+  ObservableFuture<ObservableList<Questao>?> questoesLoading =
+      ObservableFuture.value(null);
+
+  @observable
+  ObservableList<Questao>? questoes;
 
   @observable
   Inspecao? inspecao;
@@ -29,15 +41,27 @@ abstract class AddEditInspecaoControllerBase extends ControllerBase with Store {
   @observable
   String? descricao;
 
+  @observable
+  ObservableList<InspecaoQuestao> inspecaoQuestoes =
+      <InspecaoQuestao>[].asObservable();
+
+  @observable
+  String questao = '';
+
   @computed
-  bool get isFormValid => nome != null && nome!.isNotEmpty;
+  bool get isFormValid =>
+      nome != null && nome!.isNotEmpty && inspecaoQuestoes.isNotEmpty;
 
   @action
-  void fetch() {
+  Future<void> fetch() async {
+    questoesLoading = _questaoService.getQuestoes().asObservable();
+    questoes = await questoesLoading;
     inspecao = _cadastroInspecaoStore.inspecao;
     if (inspecao != null) {
       nome = inspecao?.nome;
       descricao = inspecao?.descricao;
+      inspecaoQuestoes =
+          await _inspecaoService.getInspecaoQuestoes(inspecao!.id!);
     }
   }
 
@@ -50,5 +74,9 @@ abstract class AddEditInspecaoControllerBase extends ControllerBase with Store {
       inspecao!.descricao = descricao;
     }
     await _inspecaoService.saveInspecao(inspecao!);
+    for (final e in inspecaoQuestoes) {
+      e.inspecao = inspecao!.id;
+      await _inspecaoService.saveInspecaoQuestao(e);
+    }
   }
 }

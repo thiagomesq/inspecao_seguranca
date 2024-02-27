@@ -17,6 +17,38 @@ mixin _$AddEditInspecaoController on AddEditInspecaoControllerBase, Store {
               name: 'AddEditInspecaoControllerBase.isFormValid'))
           .value;
 
+  late final _$questoesLoadingAtom = Atom(
+      name: 'AddEditInspecaoControllerBase.questoesLoading', context: context);
+
+  @override
+  ObservableFuture<ObservableList<Questao>?> get questoesLoading {
+    _$questoesLoadingAtom.reportRead();
+    return super.questoesLoading;
+  }
+
+  @override
+  set questoesLoading(ObservableFuture<ObservableList<Questao>?> value) {
+    _$questoesLoadingAtom.reportWrite(value, super.questoesLoading, () {
+      super.questoesLoading = value;
+    });
+  }
+
+  late final _$questoesAtom =
+      Atom(name: 'AddEditInspecaoControllerBase.questoes', context: context);
+
+  @override
+  ObservableList<Questao>? get questoes {
+    _$questoesAtom.reportRead();
+    return super.questoes;
+  }
+
+  @override
+  set questoes(ObservableList<Questao>? value) {
+    _$questoesAtom.reportWrite(value, super.questoes, () {
+      super.questoes = value;
+    });
+  }
+
   late final _$inspecaoAtom =
       Atom(name: 'AddEditInspecaoControllerBase.inspecao', context: context);
 
@@ -65,6 +97,46 @@ mixin _$AddEditInspecaoController on AddEditInspecaoControllerBase, Store {
     });
   }
 
+  late final _$inspecaoQuestoesAtom = Atom(
+      name: 'AddEditInspecaoControllerBase.inspecaoQuestoes', context: context);
+
+  @override
+  ObservableList<InspecaoQuestao> get inspecaoQuestoes {
+    _$inspecaoQuestoesAtom.reportRead();
+    return super.inspecaoQuestoes;
+  }
+
+  @override
+  set inspecaoQuestoes(ObservableList<InspecaoQuestao> value) {
+    _$inspecaoQuestoesAtom.reportWrite(value, super.inspecaoQuestoes, () {
+      super.inspecaoQuestoes = value;
+    });
+  }
+
+  late final _$questaoAtom =
+      Atom(name: 'AddEditInspecaoControllerBase.questao', context: context);
+
+  @override
+  String get questao {
+    _$questaoAtom.reportRead();
+    return super.questao;
+  }
+
+  @override
+  set questao(String value) {
+    _$questaoAtom.reportWrite(value, super.questao, () {
+      super.questao = value;
+    });
+  }
+
+  late final _$fetchAsyncAction =
+      AsyncAction('AddEditInspecaoControllerBase.fetch', context: context);
+
+  @override
+  Future<void> fetch() {
+    return _$fetchAsyncAction.run(() => super.fetch());
+  }
+
   late final _$saveAsyncAction =
       AsyncAction('AddEditInspecaoControllerBase.save', context: context);
 
@@ -73,26 +145,16 @@ mixin _$AddEditInspecaoController on AddEditInspecaoControllerBase, Store {
     return _$saveAsyncAction.run(() => super.save());
   }
 
-  late final _$AddEditInspecaoControllerBaseActionController =
-      ActionController(name: 'AddEditInspecaoControllerBase', context: context);
-
-  @override
-  void fetch() {
-    final _$actionInfo = _$AddEditInspecaoControllerBaseActionController
-        .startAction(name: 'AddEditInspecaoControllerBase.fetch');
-    try {
-      return super.fetch();
-    } finally {
-      _$AddEditInspecaoControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
   @override
   String toString() {
     return '''
+questoesLoading: ${questoesLoading},
+questoes: ${questoes},
 inspecao: ${inspecao},
 nome: ${nome},
 descricao: ${descricao},
+inspecaoQuestoes: ${inspecaoQuestoes},
+questao: ${questao},
 isFormValid: ${isFormValid}
     ''';
   }

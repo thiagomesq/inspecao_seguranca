@@ -44,6 +44,23 @@ class FirestoreService {
         .catchError((error) => error.toString());
   }
 
+  Future<String> deleteDataByField(
+    String collection,
+    String field,
+    Object value,
+  ) async {
+    return _db
+        .collection(collection)
+        .where(field, isEqualTo: value)
+        .get()
+        .then((value) {
+      for (var element in value.docs) {
+        element.reference.delete();
+      }
+      return 'Success';
+    }).catchError((error) => error.toString());
+  }
+
   Future<String> deleteDataInCollection(
     String collectionOrigin,
     String collectionDestiny,

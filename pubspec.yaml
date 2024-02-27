@@ -30,7 +30,6 @@ dependencies:
   injectable: ^2.2.0
   json_annotation: ^4.8.1
   logging: ^1.2.0
-  getwidget: ^4.0.0
   uuid: ^4.0.0
   external_path: ^1.0.3
   flutter_typeahead: ^5.0.2

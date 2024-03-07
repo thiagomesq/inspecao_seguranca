@@ -6,6 +6,7 @@ import 'package:inspecao_seguranca/ui/pages/cadastros/cadastros_controller.dart'
 import 'package:inspecao_seguranca/ui/pages/cadastros/inspecao/inspecao_page.dart';
 import 'package:inspecao_seguranca/ui/pages/cadastros/questao/questao_page.dart';
 import 'package:inspecao_seguranca/ui/pages/cadastros/tipo_veiculo/tipo_veiculo_page.dart';
+import 'package:inspecao_seguranca/ui/pages/cadastros/veiculo/veiculo_page.dart';
 import 'package:inspecao_seguranca/ui/shared/controller_provider.dart';
 import 'package:inspecao_seguranca/ui/shared/is_screen_button.dart';
 
@@ -64,6 +65,10 @@ class CadastrosPage extends StatelessWidget {
                             rota: QuestaoPage.routeName,
                           )
                         : const SizedBox.shrink(),
+                    const ISScreenButton(
+                      texto: 'Veículo / Equipamento',
+                      rota: VeiculoPage.routeName,
+                    ),
                   ],
                 ),
               ),

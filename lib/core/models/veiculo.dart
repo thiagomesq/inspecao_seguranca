@@ -4,21 +4,17 @@ part 'veiculo.g.dart';
 
 @JsonSerializable()
 class Veiculo {
-  final String? placa;
-  final int? ano;
-  final String? tipo;
-  final String? empresa;
-  final String? registro;
-  final bool? laudo;
-  final String? finalidade;
+  String? placa;
+  int? ano;
+  String? tipo;
+  String? empresa;
+  String? finalidade;
 
   Veiculo({
-    this.ano,
-    this.empresa,
-    this.registro,
     this.placa,
+    this.ano,
     this.tipo,
-    this.laudo,
+    this.empresa,
     this.finalidade,
   });
 

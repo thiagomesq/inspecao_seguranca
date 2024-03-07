@@ -174,7 +174,7 @@ class AddEditInspecaoPage extends StatelessWidget {
                                 }
                                 final item = controller.inspecaoQuestoes
                                     .removeAt(oldIndex);
-                                item.ordem = newIndex;
+                                item.ordem = newIndex + 1;
                                 controller.inspecaoQuestoes
                                     .insert(newIndex, item);
                               },

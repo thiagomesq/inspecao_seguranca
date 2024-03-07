@@ -171,7 +171,7 @@ class Excel {
         dados.getRangeByIndex(12, 3, 12, 5),
         dados.getRangeByIndex(12, 6),
         'IPVA',
-        v.registro!,
+        v.finalidade!,
       );
       /* DATA E CONTRATANTE */
       range = dados.getRangeByIndex(4, 7, 4, 18);

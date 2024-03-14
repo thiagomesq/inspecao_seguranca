@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
+import 'package:inspecao_seguranca/core/enums/user_type.dart';
+import 'package:inspecao_seguranca/core/models/plataforma.dart';
 import 'package:inspecao_seguranca/ui/pages/empresa/empresa_page.dart';
 import 'package:inspecao_seguranca/ui/pages/home/home_page.dart';
 import 'package:inspecao_seguranca/ui/pages/login/login_page.dart';
 import 'package:inspecao_seguranca/ui/pages/splash/splash_controller.dart';
 import 'package:inspecao_seguranca/ui/shared/controller_provider.dart';
+import 'package:inspecao_seguranca/ui/shared/is_dialog.dart';
 
 class SplashPage extends StatelessWidget {
   static const String routeName = '/';
@@ -25,9 +28,18 @@ class SplashPage extends StatelessWidget {
             () {
               if (isLogged) {
                 if (user!.id != null) {
-                  Navigator.of(context).pushReplacementNamed(
-                    HomePage.routeName,
-                  );
+                  if (Plataforma.isWeb && user.type == UserType.user) {
+                    showAlert(
+                      context: context,
+                      title: 'Acesso Negado!',
+                      textContent:
+                          'Você não tem permissão para acessar nesta plataforma.',
+                    );
+                  } else {
+                    Navigator.of(context).pushReplacementNamed(
+                      HomePage.routeName,
+                    );
+                  }
                 } else {
                   Navigator.of(context)
                       .pushReplacementNamed(EmpresaPage.routeName);

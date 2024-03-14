@@ -17,7 +17,7 @@ abstract class SplashControllerBase extends ControllerBase with Store {
   final UsuarioStore _usuarioStore;
   final EmpresaService _empresaService;
   final EmpresaStore _empresaStore;
-  final void Function(bool isLogged, ISUsuario? usuario) onAuthenticated;
+  final void Function(bool isLogged, ISUsuario? usuario) _onAuthenticated;
 
   SplashControllerBase(
     this._authService,
@@ -25,7 +25,7 @@ abstract class SplashControllerBase extends ControllerBase with Store {
     this._usuarioStore,
     this._empresaService,
     this._empresaStore,
-    this.onAuthenticated,
+    this._onAuthenticated,
   ) {
     init();
   }
@@ -33,8 +33,8 @@ abstract class SplashControllerBase extends ControllerBase with Store {
   void init() async {
     final u = await _authService.getUser();
     ISUsuario? usuario;
-    bool isNotNullUser = u != null;
-    if (isNotNullUser) {
+    bool isLogged = u != null;
+    if (isLogged) {
       usuario = await _userService.getUser(u.uid);
       if (usuario.id == null) {
         _usuarioStore.setIsNewUser(true);
@@ -44,6 +44,6 @@ abstract class SplashControllerBase extends ControllerBase with Store {
         _empresaStore.setEmpresa(empresa);
       }
     }
-    onAuthenticated(isNotNullUser, usuario);
+    _onAuthenticated(isLogged, usuario);
   }
 }

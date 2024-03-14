@@ -3,6 +3,7 @@ import 'package:get_it/get_it.dart';
 import 'package:inspecao_seguranca/core/enums/user_type.dart';
 import 'package:inspecao_seguranca/core/models/plataforma.dart';
 import 'package:inspecao_seguranca/ui/pages/cadastros/cadastros_controller.dart';
+import 'package:inspecao_seguranca/ui/pages/cadastros/funcionario/funcionario_page.dart';
 import 'package:inspecao_seguranca/ui/pages/cadastros/inspecao/inspecao_page.dart';
 import 'package:inspecao_seguranca/ui/pages/cadastros/questao/questao_page.dart';
 import 'package:inspecao_seguranca/ui/pages/cadastros/tipo_veiculo/tipo_veiculo_page.dart';
@@ -24,6 +25,7 @@ class CadastrosPage extends StatelessWidget {
       ),
       builder: (context, controller) {
         final isUser = controller.usuario.type == UserType.user;
+        final isAdmin = controller.usuario.type == UserType.admin;
         return Container(
           padding: EdgeInsets.symmetric(
             horizontal: isWeb ? width * 0.3 : 20,
@@ -69,6 +71,12 @@ class CadastrosPage extends StatelessWidget {
                       texto: 'Veículo / Equipamento',
                       rota: VeiculoPage.routeName,
                     ),
+                    isAdmin
+                        ? const ISScreenButton(
+                            texto: 'Funcionário',
+                            rota: FuncionarioPage.routeName,
+                          )
+                        : const SizedBox.shrink(),
                   ],
                 ),
               ),

@@ -45,5 +45,9 @@ class AuthService {
     await _user?.updateDisplayName(name);
   }
 
+  Future<void> deleteUser(String uid) async {
+    await _auth.currentUser?.delete();
+  }
+
   FirebaseAuth get auth => _auth;
 }

@@ -7,6 +7,7 @@ import 'package:inspecao_seguranca/ui/pages/empresa/empresa_page.dart';
 import 'package:inspecao_seguranca/ui/pages/home/home_page.dart';
 import 'package:inspecao_seguranca/ui/pages/login/login_controller.dart';
 import 'package:inspecao_seguranca/ui/shared/controller_provider.dart';
+import 'package:inspecao_seguranca/ui/shared/is_dialog.dart';
 import 'package:inspecao_seguranca/ui/shared/is_future_button.dart';
 import 'package:inspecao_seguranca/ui/shared/is_text_field.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
@@ -16,9 +17,18 @@ class LoginPage extends StatelessWidget {
 
   const LoginPage({super.key});
 
-  void onValidatedCode(BuildContext context, ISUsuario? usuario) {
+  void onValidatedCode(
+      BuildContext context, ISUsuario? usuario, bool isNewUser) {
     if (usuario!.id == null) {
-      Navigator.of(context).pushReplacementNamed(EmpresaPage.routeName);
+      if (isNewUser) {
+        Navigator.of(context).pushReplacementNamed(EmpresaPage.routeName);
+      } else {
+        showAlert(
+          context: context,
+          title: 'Acesso Negado!',
+          textContent: 'Você não tem permissão para acessar nesta plataforma.',
+        );
+      }
     } else {
       Navigator.of(context).pushReplacementNamed(HomePage.routeName);
     }
@@ -29,6 +39,7 @@ class LoginPage extends StatelessWidget {
     double width = MediaQuery.of(context).size.width;
     return ControllerScope(
       create: (_) => LoginController(
+        GetIt.I(),
         GetIt.I(),
         GetIt.I(),
         GetIt.I(),

@@ -4,6 +4,7 @@ import 'package:inspecao_seguranca/core/enums/user_type.dart';
 import 'package:inspecao_seguranca/ui/pages/cadastros/cadastros_page.dart';
 import 'package:inspecao_seguranca/ui/pages/home/home_controller.dart';
 import 'package:inspecao_seguranca/ui/pages/home/part/is_bottom_navigation_bar.dart';
+import 'package:inspecao_seguranca/ui/pages/inspecoes/inspecoes_page.dart';
 import 'package:inspecao_seguranca/ui/shared/controller_provider.dart';
 import 'package:inspecao_seguranca/ui/shared/is_app_bar.dart';
 
@@ -20,7 +21,7 @@ class _HomePageState extends State<HomePage> {
   final _screenOptions = <Widget>[
     const WelcomePage(),
     const CadastrosPage(),
-    const WelcomePage(),
+    const InspecoesPage(),
     const WelcomePage(),
   ];
   void _onItemTapped(int index) {

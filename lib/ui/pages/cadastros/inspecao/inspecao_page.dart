@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get_it/get_it.dart';
+import 'package:inspecao_seguranca/core/enums/user_type.dart';
 import 'package:inspecao_seguranca/core/models/inspecao.dart';
 import 'package:inspecao_seguranca/core/models/plataforma.dart';
 import 'package:inspecao_seguranca/ui/pages/cadastros/inspecao/add_edit/add_edit_page.dart';
@@ -22,6 +23,7 @@ class InspecaoPage extends StatelessWidget {
     final width = MediaQuery.of(context).size.width;
     return ControllerScope(
       create: (context) => InspecaoController(
+        GetIt.I(),
         GetIt.I(),
         GetIt.I(),
       ),
@@ -156,11 +158,14 @@ class InspecaoCard extends StatelessWidget {
           color: theme.colorScheme.surface,
           child: ListTile(
             onTap: () async {
-              controller.cadastroInspecaoStore.setInspecao(inspecao);
-              await Navigator.of(context).pushNamed(
-                AddEditInspecaoPage.routeName,
-              );
-              controller.fetch();
+              if (controller.usuario.type == UserType.master ||
+                  controller.usuario.empresa == inspecao.empresa) {
+                controller.cadastroInspecaoStore.setInspecao(inspecao);
+                await Navigator.of(context).pushNamed(
+                  AddEditInspecaoPage.routeName,
+                );
+                controller.fetch();
+              }
             },
             title: Text(
               inspecao.nome!,
@@ -169,16 +174,27 @@ class InspecaoCard extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            subtitle: Text(
-              inspecao.descricao ?? '',
-              style: theme.textTheme.bodySmall!.copyWith(
-                color: theme.colorScheme.primary,
-              ),
+            subtitle: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  inspecao.descricao ?? '',
+                  style: theme.textTheme.bodySmall!.copyWith(
+                    color: theme.colorScheme.primary,
+                  ),
+                ),
+                controller.usuario.type != UserType.master &&
+                        controller.usuario.empresa != inspecao.empresa
+                    ? const Icon(Icons.lock, color: Colors.red)
+                    : const SizedBox.shrink(),
+              ],
             ),
             trailing: ISFutureButton(
               futureBuilder: (_) => controller.delete(inspecao.id!),
               confirmText: 'Tem certeza que deseja excluir a inspeção?',
               isIconButton: true,
+              isValid: controller.usuario.type == UserType.master ||
+                  controller.usuario.empresa == inspecao.empresa,
               onOk: (_, __) => controller.fetch(),
               child: const Icon(Icons.delete_outline, color: Colors.red),
             ),

@@ -9,6 +9,7 @@ class AuthService {
     void Function(String verificationId, int? resendToken) codeSent,
     void Function(FirebaseAuthException e) verificationFailed,
   ) async {
+    _auth.setSettings(phoneNumber: '+5531986336988');
     _auth.verifyPhoneNumber(
       phoneNumber: phone,
       verificationCompleted: (PhoneAuthCredential credential) async {

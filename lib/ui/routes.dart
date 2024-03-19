@@ -11,6 +11,7 @@ import 'package:inspecao_seguranca/ui/pages/cadastros/veiculo/add_edit/add_edit_
 import 'package:inspecao_seguranca/ui/pages/cadastros/veiculo/veiculo_page.dart';
 import 'package:inspecao_seguranca/ui/pages/empresa/empresa_page.dart';
 import 'package:inspecao_seguranca/ui/pages/home/home_page.dart';
+import 'package:inspecao_seguranca/ui/pages/inspecoes/resposta/resposta_page.dart';
 import 'package:inspecao_seguranca/ui/pages/login/login_page.dart';
 import 'package:inspecao_seguranca/ui/pages/splash/splash_page.dart';
 import 'package:inspecao_seguranca/ui/pages/usuario/usuario_page.dart';
@@ -31,4 +32,5 @@ Map<String, WidgetBuilder> routes = <String, WidgetBuilder>{
   AddEditVeiculoPage.routeName: (_) => const AddEditVeiculoPage(),
   FuncionarioPage.routeName: (_) => const FuncionarioPage(),
   AddEditFuncioarioPage.routeName: (_) => const AddEditFuncioarioPage(),
+  RespostaPage.routeName: (_) => const RespostaPage(),
 };

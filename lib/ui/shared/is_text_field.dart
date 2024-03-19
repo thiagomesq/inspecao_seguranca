@@ -12,6 +12,7 @@ class ISTextField extends StatelessWidget {
   final TextEditingController? controller;
   final DateTime? firstDate;
   final bool? isEnable;
+  final FocusNode? focusNode;
   const ISTextField({
     super.key,
     this.keyboardType,
@@ -23,6 +24,7 @@ class ISTextField extends StatelessWidget {
     this.controller,
     this.firstDate,
     this.isEnable,
+    this.focusNode,
   });
 
   @override
@@ -32,6 +34,7 @@ class ISTextField extends StatelessWidget {
     }
     return TextFormField(
       controller: controller,
+      focusNode: focusNode,
       initialValue: controller == null ? initialValue : null,
       keyboardType: keyboardType,
       inputFormatters: inputFormatters,

@@ -18,6 +18,16 @@ class VeiculoService {
     return list.map((doc) => Veiculo.fromJson(doc)).toList().asObservable();
   }
 
+  Future<ObservableList<Veiculo>> getVeiculosByTipoVeiculo(
+      String tipoVeiculo) async {
+    final list = await _firestoreService.getDataByField(
+      collection,
+      'tipo',
+      tipoVeiculo,
+    );
+    return list.map((doc) => Veiculo.fromJson(doc)).toList().asObservable();
+  }
+
   Future<String> saveVeiculo(Veiculo veiculo) async {
     return await _firestoreService.saveData(
       collection,

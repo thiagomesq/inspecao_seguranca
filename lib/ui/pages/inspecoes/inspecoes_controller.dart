@@ -3,22 +3,22 @@ import 'package:inspecao_seguranca/core/models/inspecao.dart';
 import 'package:inspecao_seguranca/core/models/is_usuario.dart';
 import 'package:inspecao_seguranca/infra/http/services/inspecao_service.dart';
 import 'package:inspecao_seguranca/ui/shared/controller_base/controller_base.dart';
-import 'package:inspecao_seguranca/ui/stores/cadastro_inspecao_store.dart';
+import 'package:inspecao_seguranca/ui/stores/inspecao_store.dart';
 import 'package:inspecao_seguranca/ui/stores/usuario_store.dart';
 import 'package:mobx/mobx.dart';
 
-part 'inspecao_controller.g.dart';
+part 'inspecoes_controller.g.dart';
 
-class InspecaoController = InspecaoControllerBase with _$InspecaoController;
+class InspecoesController = _InspecoesControllerBase with _$InspecoesController;
 
-abstract class InspecaoControllerBase extends ControllerBase with Store {
+abstract class _InspecoesControllerBase extends ControllerBase with Store {
   final InspecaoService _inspecaoService;
-  final CadastroInspecaoStore cadastroInspecaoStore;
+  final InspecaoStore inspecaoStore;
   final UsuarioStore _usuarioStore;
 
-  InspecaoControllerBase(
+  _InspecoesControllerBase(
     this._inspecaoService,
-    this.cadastroInspecaoStore,
+    this.inspecaoStore,
     this._usuarioStore,
   ) {
     fetch();
@@ -48,11 +48,5 @@ abstract class InspecaoControllerBase extends ControllerBase with Store {
     }
 
     inspecoes = await inspecoesLoading;
-  }
-
-  @action
-  Future<void> delete(String id) async {
-    await _inspecaoService.deleteInspecao(id);
-    inspecoes!.removeWhere((element) => element.id == id);
   }
 }

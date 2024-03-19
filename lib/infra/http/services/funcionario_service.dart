@@ -16,7 +16,12 @@ class FuncionarioService {
   Future<Funcionario> getFuncionarioByPhone(String phone) async {
     final doc =
         await _firestoreService.getDataByField(collection, 'telefone', phone);
-    return Funcionario.fromJson(doc.first);
+    if (doc.isNotEmpty) {
+      return Funcionario.fromJson(doc.first);
+    }
+    final func = Funcionario.fromJson({});
+    func.id = null;
+    return func;
   }
 
   Future<ObservableList<Funcionario>> getFuncionarios(String empresa) async {

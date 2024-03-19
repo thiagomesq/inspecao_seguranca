@@ -49,7 +49,7 @@ abstract class _LoginControllerBase extends ControllerBase with Store {
   bool isCodeSent = false;
 
   @computed
-  bool get isFormValid => phone != null && phone!.length == 15;
+  bool get isFormValid => phone != null && phone!.length == 11;
 
   @computed
   bool get isSmsCodeValid => smsCode != null && smsCode!.length == 6;
@@ -107,7 +107,6 @@ abstract class _LoginControllerBase extends ControllerBase with Store {
         print(e);
       },
     );
-    phone = '';
     isCodeSent = true;
   }
 }

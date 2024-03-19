@@ -45,6 +45,7 @@ class AddEditInspecaoPage extends StatelessWidget {
         GetIt.I(),
         GetIt.I(),
         GetIt.I(),
+        GetIt.I(),
       ),
       builder: (context, controller) {
         return Scaffold(

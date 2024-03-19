@@ -8,8 +8,13 @@ class Inspecao {
   String? id;
   String? nome;
   String? descricao;
+  String? empresa;
 
-  Inspecao({this.nome, this.descricao}) : id = const Uuid().v4();
+  Inspecao({
+    this.nome,
+    this.descricao,
+    this.empresa,
+  }) : id = const Uuid().v4();
 
   factory Inspecao.fromJson(Map<String, dynamic> json) =>
       _$InspecaoFromJson(json);

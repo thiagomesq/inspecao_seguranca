@@ -3,12 +3,21 @@ import 'package:flutter/material.dart';
 class ISScreenButton extends StatelessWidget {
   final String texto;
   final String rota;
-  const ISScreenButton({super.key, required this.texto, required this.rota});
+  final VoidCallback? onPressed;
+  const ISScreenButton({
+    super.key,
+    required this.texto,
+    required this.rota,
+    this.onPressed,
+  });
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
       onPressed: () {
+        if (onPressed != null) {
+          onPressed!.call();
+        }
         Navigator.of(context).pushNamed(rota);
       },
       style: ButtonStyle(

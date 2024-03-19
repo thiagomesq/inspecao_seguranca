@@ -269,18 +269,16 @@ class FirestoreService {
     String collection,
     String field,
     Object value,
-  ) {
-    return _db
-        .collection(collection)
-        .where(field, isEqualTo: value)
-        .get()
-        .then((value) {
-      List<Map<String, dynamic>> data = [];
-      for (var element in value.docs) {
+  ) async {
+    List<Map<String, dynamic>> data = [];
+    final result =
+        await _db.collection(collection).where(field, isEqualTo: value).get();
+    for (var element in result.docs) {
+      if (element.exists) {
         data.add(element.data());
       }
-      return data;
-    });
+    }
+    return data;
   }
 
   Future<List<Map<String, dynamic>>> getDataByFieldInCollection(
@@ -289,19 +287,19 @@ class FirestoreService {
     String id,
     String field,
     Object value,
-  ) {
-    return _db
+  ) async {
+    List<Map<String, dynamic>> data = [];
+    final result = await _db
         .collection(collectionOrigin)
         .doc(id)
         .collection(collectionDestiny)
         .where(field, isEqualTo: value)
-        .get()
-        .then((value) {
-      List<Map<String, dynamic>> data = [];
-      for (var element in value.docs) {
+        .get();
+    for (var element in result.docs) {
+      if (element.exists) {
         data.add(element.data());
       }
-      return data;
-    });
+    }
+    return data;
   }
 }

@@ -54,6 +54,9 @@ class LoginPage extends StatelessWidget {
           initialText: controller.phone,
         );
         final sendSMSController = TextEditingController();
+        final sendSMSFocus = FocusNode();
+        sendSMSFocus.requestFocus();
+        final smsCodeFocus = FocusNode();
         return Scaffold(
           body: Container(
             padding: EdgeInsets.symmetric(
@@ -80,15 +83,18 @@ class LoginPage extends StatelessWidget {
                     return !controller.isCodeSent
                         ? ISTextField(
                             controller: sendSMSController,
+                            focusNode: sendSMSFocus,
                             keyboardType: TextInputType.phone,
                             labelText: 'Celular',
-                            onChanged: (value) => controller.phone = value,
+                            onChanged: (value) =>
+                                controller.phone = phoneMask.getUnmaskedText(),
                             inputFormatters: [
                               phoneMask,
                             ],
                           )
                         : ISTextField(
                             keyboardType: TextInputType.number,
+                            focusNode: smsCodeFocus,
                             labelText: 'Código SMS',
                             onChanged: (value) => controller.smsCode = value,
                           );
@@ -102,6 +108,7 @@ class LoginPage extends StatelessWidget {
                             isValid: controller.isFormValid,
                             futureBuilder: (_) {
                               sendSMSController.clear();
+                              sendSMSFocus.requestFocus();
                               return controller.sendCode();
                             },
                             child: const Text('Enviar SMS'),

@@ -117,7 +117,7 @@ class AddEditVeiculoPage extends StatelessWidget {
                                     builder: (_) {
                                       return Expanded(
                                         flex: 2,
-                                        child: ISFutureButton(
+                                        child: ISFutureButton<dynamic>(
                                           futureBuilder: (_) =>
                                               controller.placaAvailable(),
                                           isValid: controller.placa != null &&

@@ -3,8 +3,10 @@ import 'package:inspecao_seguranca/core/models/inspecao.dart';
 import 'package:inspecao_seguranca/core/models/inspecao_questao.dart';
 import 'package:inspecao_seguranca/core/models/is_usuario.dart';
 import 'package:inspecao_seguranca/core/models/questao.dart';
+import 'package:inspecao_seguranca/core/models/tipo_veiculo.dart';
 import 'package:inspecao_seguranca/infra/http/services/inspecao_service.dart';
 import 'package:inspecao_seguranca/infra/http/services/questao_service.dart';
+import 'package:inspecao_seguranca/infra/http/services/tipo_veiculo_service.dart';
 import 'package:inspecao_seguranca/ui/shared/controller_base/controller_base.dart';
 import 'package:inspecao_seguranca/ui/stores/cadastro_inspecao_store.dart';
 import 'package:inspecao_seguranca/ui/stores/usuario_store.dart';
@@ -18,12 +20,14 @@ class AddEditInspecaoController = AddEditInspecaoControllerBase
 abstract class AddEditInspecaoControllerBase extends ControllerBase with Store {
   final InspecaoService _inspecaoService;
   final QuestaoService _questaoService;
+  final TipoVeiculoService _tipoVeiculoService;
   final CadastroInspecaoStore _cadastroInspecaoStore;
   final UsuarioStore _usuarioStore;
 
   AddEditInspecaoControllerBase(
     this._inspecaoService,
     this._questaoService,
+    this._tipoVeiculoService,
     this._cadastroInspecaoStore,
     this._usuarioStore,
   ) {
@@ -38,6 +42,9 @@ abstract class AddEditInspecaoControllerBase extends ControllerBase with Store {
   ObservableList<Questao>? questoes;
 
   @observable
+  ObservableList<TipoVeiculo>? tiposVeiculo;
+
+  @observable
   Inspecao? inspecao;
 
   @observable
@@ -45,6 +52,9 @@ abstract class AddEditInspecaoControllerBase extends ControllerBase with Store {
 
   @observable
   String? descricao;
+
+  @observable
+  String tipoVeiculo = '';
 
   @observable
   ObservableList<InspecaoQuestao> inspecaoQuestoes =
@@ -58,18 +68,24 @@ abstract class AddEditInspecaoControllerBase extends ControllerBase with Store {
 
   @computed
   bool get isFormValid =>
-      nome != null && nome!.isNotEmpty && inspecaoQuestoes.isNotEmpty;
+      nome != null &&
+      nome!.isNotEmpty &&
+      tipoVeiculo.isNotEmpty &&
+      inspecaoQuestoes.isNotEmpty;
 
   @action
   Future<void> fetch() async {
     questoesLoading = _questaoService.getQuestoes().asObservable();
     questoes = await questoesLoading;
+    tiposVeiculo = await _tipoVeiculoService.getTiposVeiculo();
     inspecao = _cadastroInspecaoStore.inspecao;
     if (inspecao != null) {
-      nome = inspecao?.nome;
-      descricao = inspecao?.descricao;
+      nome = inspecao!.nome;
+      descricao = inspecao!.descricao;
+      tipoVeiculo = inspecao!.tipoVeiculo ?? '';
       inspecaoQuestoes =
           await _inspecaoService.getInspecaoQuestoes(inspecao!.id!);
+      inspecaoQuestoes.sort((a, b) => a.ordem!.compareTo(b.ordem!));
     }
   }
 
@@ -79,11 +95,13 @@ abstract class AddEditInspecaoControllerBase extends ControllerBase with Store {
       inspecao = Inspecao(
         nome: nome,
         descricao: descricao,
+        tipoVeiculo: tipoVeiculo,
         empresa: usuario.type == UserType.master ? null : usuario.empresa,
       );
     } else {
       inspecao!.nome = nome;
       inspecao!.descricao = descricao;
+      inspecao!.tipoVeiculo = tipoVeiculo;
     }
     await _inspecaoService.saveInspecao(inspecao!);
     for (final e in inspecaoQuestoes) {

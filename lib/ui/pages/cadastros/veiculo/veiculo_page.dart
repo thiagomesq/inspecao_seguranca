@@ -190,8 +190,8 @@ class VeiculoCard extends StatelessWidget {
             ),
             subtitle: Text(
               veiculo.finalidade!,
-              style: theme.textTheme.bodyMedium!.copyWith(
-                color: theme.colorScheme.tertiary,
+              style: theme.textTheme.bodySmall!.copyWith(
+                color: theme.colorScheme.primary,
               ),
             ),
             trailing: ISFutureButton(

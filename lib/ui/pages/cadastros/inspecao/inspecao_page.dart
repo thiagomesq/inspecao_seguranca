@@ -157,6 +157,7 @@ class InspecaoCard extends StatelessWidget {
           ),
           color: theme.colorScheme.surface,
           child: ListTile(
+            isThreeLine: true,
             onTap: () async {
               if (controller.usuario.type == UserType.master ||
                   controller.usuario.empresa == inspecao.empresa) {
@@ -174,30 +175,34 @@ class InspecaoCard extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            subtitle: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  inspecao.descricao ?? '',
-                  style: theme.textTheme.bodySmall!.copyWith(
-                    color: theme.colorScheme.primary,
-                  ),
-                ),
+            subtitle: Text.rich(
+              TextSpan(children: [
+                TextSpan(text: inspecao.descricao ?? ''),
                 controller.usuario.type != UserType.master &&
                         controller.usuario.empresa != inspecao.empresa
-                    ? const Icon(Icons.lock, color: Colors.red)
-                    : const SizedBox.shrink(),
-              ],
+                    ? TextSpan(
+                        text: '(Bloqueado)',
+                        style: theme.textTheme.bodySmall!
+                            .copyWith(color: Colors.red),
+                      )
+                    : const TextSpan(),
+              ]),
+              style: theme.textTheme.bodySmall!.copyWith(
+                color: theme.colorScheme.primary,
+              ),
+              softWrap: true,
+              maxLines: 2,
             ),
-            trailing: ISFutureButton(
-              futureBuilder: (_) => controller.delete(inspecao.id!),
-              confirmText: 'Tem certeza que deseja excluir a inspeção?',
-              isIconButton: true,
-              isValid: controller.usuario.type == UserType.master ||
-                  controller.usuario.empresa == inspecao.empresa,
-              onOk: (_, __) => controller.fetch(),
-              child: const Icon(Icons.delete_outline, color: Colors.red),
-            ),
+            trailing: controller.usuario.type == UserType.master ||
+                    controller.usuario.empresa == inspecao.empresa
+                ? ISFutureButton(
+                    futureBuilder: (_) => controller.delete(inspecao.id!),
+                    confirmText: 'Tem certeza que deseja excluir a inspeção?',
+                    isIconButton: true,
+                    onOk: (_, __) => controller.fetch(),
+                    child: const Icon(Icons.delete_outline, color: Colors.red),
+                  )
+                : null,
           ),
         ),
         const SizedBox(height: 20),

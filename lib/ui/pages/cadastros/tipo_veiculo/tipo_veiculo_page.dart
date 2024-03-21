@@ -40,7 +40,7 @@ class TipoVeiculoPage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Text(
-                  'Tipos de Veículo',
+                  'Tipos de Veículo / Equipamento',
                   style: theme.textTheme.titleLarge,
                 ),
                 const SizedBox(height: 16),
@@ -94,14 +94,14 @@ class TipoVeiculoPage extends StatelessWidget {
                                       children: [
                                         TextSpan(
                                           text:
-                                              'Bem vindo(a) ao cadastro de tipos de veículo!',
+                                              'Bem vindo(a) ao cadastro de tipos de veículo / equipamento!',
                                           style: Theme.of(context)
                                               .textTheme
                                               .titleSmall,
                                         ),
                                         const TextSpan(
                                           text:
-                                              '\nAqui você pode cadastrar os tipos de veículo que serão inspecionados.',
+                                              '\nAqui você pode cadastrar os tipos de veículo / equipamento que serão inspecionados.',
                                         ),
                                       ],
                                     ),
@@ -175,7 +175,7 @@ class TipoVeiculoCard extends StatelessWidget {
             trailing: ISFutureButton(
               futureBuilder: (_) => controller.delete(tipoVeiculo.id!),
               confirmText:
-                  'Tem certeza que deseja excluir esse tipo de veículo?',
+                  'Tem certeza que deseja excluir esse tipo de veículo / equipamento?',
               isIconButton: true,
               onOk: (_, __) => controller.fetch(),
               child: const Icon(Icons.delete_outline, color: Colors.red),

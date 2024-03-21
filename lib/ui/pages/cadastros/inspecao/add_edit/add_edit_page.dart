@@ -46,6 +46,7 @@ class AddEditInspecaoPage extends StatelessWidget {
         GetIt.I(),
         GetIt.I(),
         GetIt.I(),
+        GetIt.I(),
       ),
       builder: (context, controller) {
         return Scaffold(
@@ -60,183 +61,219 @@ class AddEditInspecaoPage extends StatelessWidget {
             ),
             child: Observer(
               builder: (_) {
-                List<DropdownMenuItem<String>> questoesItems = [
-                  const DropdownMenuItem(
-                    value: '',
-                    child: Text('Selecione uma questão'),
-                  ),
-                ];
-                if (controller.questoes != null) {
-                  if (controller.questoes!.length > 1) {
-                    controller.questoes!
-                        .sort((a, b) => a.titulo!.compareTo(b.titulo!));
-                  }
-                  questoesItems.addAll(controller.questoes!
-                      .map(
-                        (e) => DropdownMenuItem(
-                          value: e.id,
-                          child: Text(e.titulo!),
-                        ),
-                      )
-                      .toList());
-                }
-                return ISFetch(
-                  future: controller.questoesLoading,
-                  onReload: () => controller.fetch(),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      Text(
-                        '${controller.inspecao == null ? 'Nova' : 'Edição de'} Inspeção',
-                        style: Theme.of(context).textTheme.titleLarge,
-                      ),
-                      const SizedBox(height: 16),
-                      Expanded(
-                        child: Form(
-                          child: ListView(
-                            padding: const EdgeInsets.all(0),
-                            children: [
-                              ISTextField(
-                                labelText: 'Nome',
-                                initialValue: controller.nome,
-                                onChanged: (value) => controller.nome = value,
-                              ),
-                              const SizedBox(height: 16),
-                              ISTextField(
-                                labelText: 'Descrição',
-                                initialValue: controller.descricao,
-                                onChanged: (value) =>
-                                    controller.descricao = value,
-                              ),
-                              const SizedBox(height: 16),
-                              Row(
-                                children: [
-                                  Observer(
-                                    builder: (_) {
-                                      return Expanded(
-                                        flex: 2,
-                                        child: ISDropdownButton(
-                                          labelText: 'Questão',
-                                          initialValue: controller.questao,
-                                          items: questoesItems,
-                                          onChanged: (value) {
-                                            controller.questao = value;
-                                          },
-                                        ),
-                                      );
-                                    },
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Text(
+                      '${controller.inspecao == null ? 'Nova' : 'Edição de'} Inspeção',
+                      style: Theme.of(context).textTheme.titleLarge,
+                    ),
+                    const SizedBox(height: 16),
+                    Expanded(
+                      child: Form(
+                        child: Observer(builder: (_) {
+                          List<DropdownMenuItem<String>> questoesItems = [
+                            const DropdownMenuItem(
+                              value: '',
+                              child: Text('Selecione uma questão'),
+                            ),
+                          ];
+                          if (controller.questoes != null) {
+                            if (controller.questoes!.length > 1) {
+                              controller.questoes!.sort(
+                                  (a, b) => a.titulo!.compareTo(b.titulo!));
+                            }
+                            questoesItems.addAll(controller.questoes!
+                                .map(
+                                  (e) => DropdownMenuItem(
+                                    value: e.id,
+                                    child: Text(e.titulo!),
                                   ),
-                                  const SizedBox(width: 10),
-                                  Observer(
-                                    builder: (_) {
-                                      return Expanded(
-                                        child: ISButton(
-                                          isValid:
-                                              controller.questao.isNotEmpty &&
-                                                  !controller.inspecaoQuestoes
-                                                      .any((e) =>
-                                                          e.questao ==
-                                                          controller.questao),
-                                          onPressed: () {
-                                            final inspecaoQuestao =
-                                                InspecaoQuestao(
-                                              questao: controller.questao,
-                                              ordem: controller
-                                                      .inspecaoQuestoes.length +
-                                                  1,
-                                            );
-                                            controller.inspecaoQuestoes
-                                                .add(inspecaoQuestao);
-                                          },
-                                          child: const Text('Adicionar'),
-                                        ),
-                                      );
-                                    },
+                                )
+                                .toList());
+                          }
+                          List<DropdownMenuItem<String>> tiposVeiculoItems = [
+                            const DropdownMenuItem(
+                              value: '',
+                              child: Text(
+                                  'Selecione um tipo de veículo / equipamento'),
+                            ),
+                          ];
+                          if (controller.tiposVeiculo != null) {
+                            if (controller.tiposVeiculo!.length > 1) {
+                              controller.tiposVeiculo!
+                                  .sort((a, b) => a.nome!.compareTo(b.nome!));
+                            }
+                            tiposVeiculoItems.addAll(controller.tiposVeiculo!
+                                .map(
+                                  (e) => DropdownMenuItem(
+                                    value: e.id,
+                                    child: Text(e.nome!),
                                   ),
-                                ],
-                              ),
-                              const SizedBox(height: 16),
-                              Text(
-                                'Questões selecionadas:',
-                                style: Theme.of(context).textTheme.titleSmall,
-                              ),
-                            ],
-                          ),
-                        ),
+                                )
+                                .toList());
+                          }
+                          return ISFetch(
+                            future: controller.questoesLoading,
+                            onReload: () => controller.fetch(),
+                            child: ListView(
+                              padding: const EdgeInsets.all(0),
+                              children: [
+                                ISTextField(
+                                  labelText: 'Nome',
+                                  initialValue: controller.nome,
+                                  onChanged: (value) => controller.nome = value,
+                                ),
+                                const SizedBox(height: 16),
+                                ISTextField(
+                                  labelText: 'Descrição',
+                                  initialValue: controller.descricao,
+                                  onChanged: (value) =>
+                                      controller.descricao = value,
+                                ),
+                                const SizedBox(height: 16),
+                                ISDropdownButton(
+                                  labelText: 'Tipo de Veículo',
+                                  initialValue: controller.tipoVeiculo,
+                                  items: tiposVeiculoItems,
+                                  onChanged: (value) =>
+                                      controller.tipoVeiculo = value,
+                                ),
+                                const SizedBox(height: 16),
+                                Row(
+                                  children: [
+                                    Observer(
+                                      builder: (_) {
+                                        return Expanded(
+                                          flex: 3,
+                                          child: ISDropdownButton(
+                                            labelText: 'Questão',
+                                            initialValue: controller.questao,
+                                            items: questoesItems,
+                                            onChanged: (value) {
+                                              controller.questao = value;
+                                            },
+                                          ),
+                                        );
+                                      },
+                                    ),
+                                    const SizedBox(width: 10),
+                                    Observer(
+                                      builder: (_) {
+                                        return Expanded(
+                                          child: ISButton(
+                                            isValid:
+                                                controller.questao.isNotEmpty &&
+                                                    !controller.inspecaoQuestoes
+                                                        .any((e) =>
+                                                            e.questao ==
+                                                            controller.questao),
+                                            onPressed: () {
+                                              final inspecaoQuestao =
+                                                  InspecaoQuestao(
+                                                questao: controller.questao,
+                                                ordem: controller
+                                                        .inspecaoQuestoes
+                                                        .length +
+                                                    1,
+                                              );
+                                              controller.inspecaoQuestoes
+                                                  .add(inspecaoQuestao);
+                                            },
+                                            child: const Text('Adicionar'),
+                                          ),
+                                        );
+                                      },
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(height: 16),
+                                Text(
+                                  'Questões selecionadas:',
+                                  style: Theme.of(context).textTheme.titleSmall,
+                                ),
+                              ],
+                            ),
+                          );
+                        }),
                       ),
-                      Observer(
-                        builder: (_) {
-                          return Expanded(
-                            child: ReorderableListView(
-                              proxyDecorator: proxyDecorator,
-                              onReorder: (oldIndex, newIndex) {
-                                if (oldIndex < newIndex) {
-                                  newIndex -= 1;
-                                }
-                                final item = controller.inspecaoQuestoes
-                                    .removeAt(oldIndex);
-                                item.ordem = newIndex + 1;
-                                controller.inspecaoQuestoes
-                                    .insert(newIndex, item);
-                              },
-                              children: controller.inspecaoQuestoes
-                                  .map(
-                                    (e) => Card(
-                                      key: ValueKey(e.id),
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .secondary,
-                                      child: SizedBox(
-                                        height: 60,
-                                        child: Center(
-                                          child: ListTile(
-                                            title: Text(
-                                              controller.questoes!
-                                                  .firstWhere(
-                                                    (q) => q.id == e.questao,
-                                                  )
-                                                  .titulo!,
+                    ),
+                    Observer(
+                      builder: (_) {
+                        return Expanded(
+                          child: ReorderableListView(
+                            proxyDecorator: proxyDecorator,
+                            onReorder: (oldIndex, newIndex) {
+                              if (oldIndex < newIndex) {
+                                newIndex -= 1;
+                              }
+                              final item = controller.inspecaoQuestoes
+                                  .removeAt(oldIndex);
+                              item.ordem = newIndex + 1;
+                              controller.inspecaoQuestoes
+                                  .insert(newIndex, item);
+                            },
+                            children: controller.inspecaoQuestoes
+                                .map(
+                                  (e) => Card(
+                                    key: ValueKey(e.id),
+                                    color:
+                                        Theme.of(context).colorScheme.secondary,
+                                    child: Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                        vertical: 8.0,
+                                      ),
+                                      child: Center(
+                                        child: ListTile(
+                                          title: Text(
+                                            controller.questoes!
+                                                .firstWhere(
+                                                  (q) => q.id == e.questao,
+                                                )
+                                                .titulo!,
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .bodyLarge,
+                                          ),
+                                          trailing: IconButton(
+                                            icon: const Icon(
+                                              Icons.delete,
+                                              color: Colors.red,
                                             ),
-                                            trailing: IconButton(
-                                              icon: const Icon(
-                                                Icons.delete,
-                                                color: Colors.red,
-                                              ),
-                                              onPressed: () {
-                                                controller.inspecaoQuestoes
-                                                    .remove(e);
-                                              },
-                                            ),
+                                            onPressed: () {
+                                              controller.inspecaoQuestoes
+                                                  .remove(e);
+                                            },
                                           ),
                                         ),
                                       ),
                                     ),
-                                  )
-                                  .toList(),
-                            ),
-                          );
-                        },
-                      ),
-                      const SizedBox(height: 16),
-                      Observer(
-                        builder: (_) {
-                          return ISFutureButton(
-                            futureBuilder: (_) => controller.save(),
-                            isValid: controller.isFormValid,
-                            onOk: (_, __) async {
-                              await showAlert(
-                                context: context,
-                                title: 'Sucesso!',
-                                textContent: 'Inspeção salva com sucesso!',
-                              );
-                              Navigator.of(context).pop();
-                            },
-                            child: const Text('Salvar'),
-                          );
-                        },
-                      ),
-                    ],
-                  ),
+                                  ),
+                                )
+                                .toList(),
+                          ),
+                        );
+                      },
+                    ),
+                    const SizedBox(height: 16),
+                    Observer(
+                      builder: (_) {
+                        return ISFutureButton(
+                          futureBuilder: (_) => controller.save(),
+                          isValid: controller.isFormValid,
+                          onOk: (_, __) async {
+                            await showAlert(
+                              context: context,
+                              title: 'Sucesso!',
+                              textContent: 'Inspeção salva com sucesso!',
+                            );
+                            Navigator.of(context).pop();
+                          },
+                          child: const Text('Salvar'),
+                        );
+                      },
+                    ),
+                  ],
                 );
               },
             ),

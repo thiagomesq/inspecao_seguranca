@@ -40,7 +40,7 @@ class QuestaoPage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Text(
-                  'Questões',
+                  'Checklists',
                   style: theme.textTheme.titleLarge,
                 ),
                 const SizedBox(height: 16),
@@ -91,14 +91,14 @@ class QuestaoPage extends StatelessWidget {
                                       children: [
                                         TextSpan(
                                           text:
-                                              'Bem vindo(a) ao cadastro de questões!',
+                                              'Bem vindo(a) ao cadastro de checklists!',
                                           style: Theme.of(context)
                                               .textTheme
                                               .titleSmall,
                                         ),
                                         const TextSpan(
                                           text:
-                                              '\nAqui você pode cadastrar questões para serem utilizadas nas inspeções.',
+                                              '\nAqui você pode cadastrar checklists para serem utilizadas nas inspeções.',
                                         ),
                                       ],
                                     ),
@@ -172,7 +172,7 @@ class QuestaoCard extends StatelessWidget {
             ),
             trailing: ISFutureButton(
               futureBuilder: (_) => controller.delete(questao.id!),
-              confirmText: 'Tem certeza que deseja excluir essa questão?',
+              confirmText: 'Tem certeza que deseja excluir esse checklist?',
               isIconButton: true,
               onOk: (_, __) => controller.fetch(),
               child: const Icon(Icons.delete_outline, color: Colors.red),

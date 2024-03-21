@@ -8,11 +8,13 @@ class Inspecao {
   String? id;
   String? nome;
   String? descricao;
+  String? tipoVeiculo;
   String? empresa;
 
   Inspecao({
     this.nome,
     this.descricao,
+    this.tipoVeiculo,
     this.empresa,
   }) : id = const Uuid().v4();
 

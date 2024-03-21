@@ -57,13 +57,13 @@ class CadastrosPage extends StatelessWidget {
                         : const SizedBox.shrink(),
                     !isUser
                         ? const ISScreenButton(
-                            texto: 'Tipo de Veículo',
+                            texto: 'Tipo de Veículo / Equipamento',
                             rota: TipoVeiculoPage.routeName,
                           )
                         : const SizedBox.shrink(),
                     !isUser
                         ? const ISScreenButton(
-                            texto: 'Questão',
+                            texto: 'Checklist',
                             rota: QuestaoPage.routeName,
                           )
                         : const SizedBox.shrink(),

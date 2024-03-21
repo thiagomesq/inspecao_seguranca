@@ -39,7 +39,7 @@ class AddEditTipoVeiculoPage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Text(
-                      '${controller.tipoVeiculo == null ? 'Novo' : 'Edição de'} Tipo de Veículo',
+                      '${controller.tipoVeiculo == null ? 'Novo' : 'Edição de'} Tipo de Veículo / Equipamento',
                       style: Theme.of(context).textTheme.titleLarge,
                     ),
                     const SizedBox(height: 16),
@@ -67,7 +67,8 @@ class AddEditTipoVeiculoPage extends StatelessWidget {
                             await showAlert(
                               context: context,
                               title: 'Sucesso!',
-                              textContent: 'Tipo de veículo salvo com sucesso!',
+                              textContent:
+                                  'Tipo de veículo / equipamento salvo com sucesso!',
                             );
                             Navigator.of(context).pop();
                           },

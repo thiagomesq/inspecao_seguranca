@@ -19,6 +19,7 @@ class ISDropdownButton extends StatelessWidget {
       items: items,
       onChanged: onChanged,
       value: initialValue,
+      isExpanded: true,
       style: TextStyle(
         fontSize: 22,
         color: Theme.of(context).colorScheme.onBackground,

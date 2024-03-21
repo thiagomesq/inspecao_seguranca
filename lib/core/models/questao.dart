@@ -7,9 +7,8 @@ part 'questao.g.dart';
 class Questao {
   String? id;
   String? titulo;
-  List<String>? tiposVeiculo;
 
-  Questao({this.titulo, this.tiposVeiculo}) : id = const Uuid().v4();
+  Questao({this.titulo}) : id = const Uuid().v4();
 
   factory Questao.fromJson(Map<String, dynamic> json) =>
       _$QuestaoFromJson(json);

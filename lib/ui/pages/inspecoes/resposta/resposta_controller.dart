@@ -109,17 +109,7 @@ abstract class _RespostaControllerBase extends ControllerBase with Store {
       respostas.add(reposta);
       isOks.add(reposta.isOk);
       dscNCs.add(reposta.dscNC ?? '');
-      for (var tipoVeiculo in questao.tiposVeiculo!) {
-        final vs = await _veiculoService.getVeiculosByTipoVeiculo(tipoVeiculo);
-        if (veiculos.isEmpty) {
-          veiculos.addAll(vs);
-        } else {
-          for (var veiculo in veiculos) {
-            vs.removeWhere((element) => veiculo.placa == element.placa);
-          }
-          veiculos.addAll(vs);
-        }
-      }
+      veiculos = await _veiculoService.getVeiculosByTipo(inspecao.tipoVeiculo!);
     }
   }
 

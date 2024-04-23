@@ -5,6 +5,7 @@ import 'package:inspecao_seguranca/ui/pages/cadastros/cadastros_page.dart';
 import 'package:inspecao_seguranca/ui/pages/home/home_controller.dart';
 import 'package:inspecao_seguranca/ui/pages/home/part/is_bottom_navigation_bar.dart';
 import 'package:inspecao_seguranca/ui/pages/inspecoes/inspecoes_page.dart';
+import 'package:inspecao_seguranca/ui/pages/relatorios/relatorios_page.dart';
 import 'package:inspecao_seguranca/ui/shared/controller_provider.dart';
 import 'package:inspecao_seguranca/ui/shared/is_app_bar.dart';
 
@@ -22,6 +23,7 @@ class _HomePageState extends State<HomePage> {
     const WelcomePage(),
     const CadastrosPage(),
     const InspecoesPage(),
+    const RelatoriosPage(),
     const WelcomePage(),
   ];
   void _onItemTapped(int index) {
@@ -58,6 +60,11 @@ class _HomePageState extends State<HomePage> {
                 icon: Icon(Icons.list_alt_outlined),
                 activeIcon: Icon(Icons.list_alt),
                 label: 'Inspeções',
+              ),
+              const BottomNavigationBarItem(
+                icon: Icon(Icons.bar_chart_outlined),
+                activeIcon: Icon(Icons.bar_chart),
+                label: 'Relatórios',
               ),
               const BottomNavigationBarItem(
                 icon: Icon(Icons.settings_outlined),

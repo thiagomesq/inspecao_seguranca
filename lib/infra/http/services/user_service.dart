@@ -1,5 +1,6 @@
 import 'package:inspecao_seguranca/core/models/is_usuario.dart';
 import 'package:inspecao_seguranca/infra/http/services/firestore_service.dart';
+import 'package:mobx/mobx.dart';
 
 class UserService {
   final FirestoreService _firestoreService;
@@ -12,9 +13,15 @@ class UserService {
     return ISUsuario.fromJson(doc);
   }
 
-  Future<List<ISUsuario>> getUsers() async {
+  Future<ObservableList<ISUsuario>> getUsers() async {
     final list = await _firestoreService.getData(collection);
-    return list.map((doc) => ISUsuario.fromJson(doc)).toList();
+    return list.map((doc) => ISUsuario.fromJson(doc)).toList().asObservable();
+  }
+
+  Future<ObservableList<ISUsuario>> getUsersByEmpresa(String empresa) async {
+    final list =
+        await _firestoreService.getDataByField(collection, 'empresa', empresa);
+    return list.map((doc) => ISUsuario.fromJson(doc)).toList().asObservable();
   }
 
   Future<String> saveUser(ISUsuario user) async {

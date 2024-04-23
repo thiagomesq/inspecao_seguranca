@@ -75,7 +75,7 @@ class ISTextField extends StatelessWidget {
                 lastDate: DateTime(2100),
               );
               if (date != null) {
-                String formattedDate = DateFormat('MM-dd-yyyy').format(date);
+                String formattedDate = DateFormat('dd/MM/yyyy').format(date);
                 controller!.text = formattedDate;
                 onChanged!(formattedDate);
               }

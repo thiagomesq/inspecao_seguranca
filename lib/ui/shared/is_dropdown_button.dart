@@ -5,12 +5,14 @@ class ISDropdownButton extends StatelessWidget {
   final List<DropdownMenuItem> items;
   final void Function(dynamic)? onChanged;
   final dynamic initialValue;
+  final bool enabled;
   const ISDropdownButton({
     super.key,
     this.labelText,
     required this.items,
     required this.onChanged,
     this.initialValue,
+    this.enabled = true,
   });
 
   @override
@@ -26,6 +28,7 @@ class ISDropdownButton extends StatelessWidget {
         fontWeight: FontWeight.bold,
       ),
       decoration: InputDecoration(
+        enabled: enabled,
         labelText: labelText,
         filled: true,
         fillColor: Theme.of(context).colorScheme.background,

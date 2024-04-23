@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:inspecao_seguranca/di.dart';
 import 'package:inspecao_seguranca/ui/pages/splash/splash_page.dart';
 import 'package:inspecao_seguranca/ui/routes.dart';
@@ -17,6 +18,14 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       locale: const Locale('pt', 'BR'),
+      localizationsDelegates: const [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: const [
+        Locale('pt', 'BR'),
+      ],
       theme: theme,
       routes: routes,
       initialRoute: SplashPage.routeName,

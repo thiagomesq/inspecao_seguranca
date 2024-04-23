@@ -5,6 +5,7 @@ import 'package:inspecao_seguranca/infra/http/services/firebase_service.dart';
 import 'package:inspecao_seguranca/infra/http/services/firestore_service.dart';
 import 'package:inspecao_seguranca/infra/http/services/funcionario_service.dart';
 import 'package:inspecao_seguranca/infra/http/services/inspecao_service.dart';
+import 'package:inspecao_seguranca/infra/http/services/pdf_service.dart';
 import 'package:inspecao_seguranca/infra/http/services/questao_service.dart';
 import 'package:inspecao_seguranca/infra/http/services/resposta_service.dart';
 import 'package:inspecao_seguranca/infra/http/services/tipo_veiculo_service.dart';
@@ -27,6 +28,7 @@ Future<void> configureDI() async {
   i.registerLazySingleton(() => FirestoreService());
   //i.registerSingletonAsync<Env>(() => Env.init());
   i.registerLazySingleton(() => AuthService());
+  i.registerLazySingleton(() => PdfService());
 
   i.registerLazySingleton<UsuarioStore>(() => UsuarioStore());
   i.registerLazySingleton<EmpresaStore>(() => EmpresaStore());

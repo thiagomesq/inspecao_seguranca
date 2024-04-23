@@ -13,6 +13,8 @@ import 'package:inspecao_seguranca/ui/pages/empresa/empresa_page.dart';
 import 'package:inspecao_seguranca/ui/pages/home/home_page.dart';
 import 'package:inspecao_seguranca/ui/pages/inspecoes/resposta/resposta_page.dart';
 import 'package:inspecao_seguranca/ui/pages/login/login_page.dart';
+import 'package:inspecao_seguranca/ui/pages/relatorios/inspecao/inspecao_page.dart';
+import 'package:inspecao_seguranca/ui/pages/relatorios/pdf_viewer/pdf_viewer_page.dart';
 import 'package:inspecao_seguranca/ui/pages/splash/splash_page.dart';
 import 'package:inspecao_seguranca/ui/pages/usuario/usuario_page.dart';
 
@@ -33,4 +35,6 @@ Map<String, WidgetBuilder> routes = <String, WidgetBuilder>{
   FuncionarioPage.routeName: (_) => const FuncionarioPage(),
   AddEditFuncioarioPage.routeName: (_) => const AddEditFuncioarioPage(),
   RespostaPage.routeName: (_) => const RespostaPage(),
+  RelatorioInspecaoPage.routeName: (_) => const RelatorioInspecaoPage(),
+  PdfViewerPage.routeName: (_) => const PdfViewerPage(),
 };

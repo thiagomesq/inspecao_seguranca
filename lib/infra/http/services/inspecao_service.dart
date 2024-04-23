@@ -69,6 +69,39 @@ class InspecaoService {
         .asObservable();
   }
 
+  Future<ObservableList<InfoInspecao>> getInfoInspecoesByInspetor(
+    String inspecao,
+    String inspetor,
+    DateTime data,
+  ) async {
+    final list = await _firestoreService.getDataByFilters(collection3, [
+      Filtro(
+        key: 'inspecao',
+        operator: Operator.isEqualTo,
+        value: inspecao,
+      ),
+      Filtro(
+        key: 'inspetor',
+        operator: Operator.isEqualTo,
+        value: inspetor,
+      ),
+      Filtro(
+        key: 'data',
+        operator: Operator.isGreaterThanOrEqualTo,
+        value: data.toIso8601String(),
+      ),
+      Filtro(
+        key: 'data',
+        operator: Operator.isLessThan,
+        value: data.add(const Duration(days: 1)).toIso8601String(),
+      ),
+    ]);
+    return list
+        .map((doc) => InfoInspecao.fromJson(doc))
+        .toList()
+        .asObservable();
+  }
+
   Future<void> saveInspecao(Inspecao inspecao) async {
     await _firestoreService.saveData(
       collection,

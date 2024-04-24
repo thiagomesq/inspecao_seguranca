@@ -19,7 +19,7 @@ class PdfService {
 
     page.graphics.drawString(
       relatorioInspecao.inspecao,
-      PdfStandardFont(PdfFontFamily.helvetica, 14, style: PdfFontStyle.bold),
+      PdfStandardFont(PdfFontFamily.helvetica, 16, style: PdfFontStyle.bold),
       bounds: titlePosition,
       brush: PdfSolidBrush(PdfColor(0, 0, 0)),
     );
@@ -38,7 +38,7 @@ class PdfService {
         font,
         bounds: Rect.fromLTWH(
           0,
-          titleTotalHeight + 35,
+          titleTotalHeight + 15,
           tamanhoData.width,
           tamanhoData.height,
         ),
@@ -53,7 +53,7 @@ class PdfService {
         font,
         bounds: Rect.fromLTWH(
           tamanhoData.width + 10,
-          titleTotalHeight + 35,
+          titleTotalHeight + 15,
           tamanhoVeiculo.width,
           tamanhoVeiculo.height,
         ),
@@ -68,7 +68,7 @@ class PdfService {
         font,
         bounds: Rect.fromLTWH(
           tamanhoData.width + tamanhoVeiculo.width + 20,
-          titleTotalHeight + 35,
+          titleTotalHeight + 15,
           tamanhoInspetor.width,
           tamanhoInspetor.height,
         ),
@@ -86,8 +86,60 @@ class PdfService {
         page,
         Offset(
           tamanhoData.width + tamanhoVeiculo.width + tamanhoInspetor.width + 30,
-          titleTotalHeight + 35,
+          titleTotalHeight + 15,
         ),
+      );
+
+      PdfGrid grid = PdfGrid();
+
+      grid.style = PdfGridStyle(
+        font: PdfStandardFont(PdfFontFamily.helvetica, 10),
+        cellPadding: PdfPaddings(left: 5, right: 5, top: 5, bottom: 5),
+      );
+
+      grid.columns.add(count: 3);
+
+      grid.headers.add(1);
+
+      final headerFontStyle = PdfStandardFont(
+        PdfFontFamily.helvetica,
+        10,
+        style: PdfFontStyle.bold,
+      );
+
+      PdfGridRow header = grid.headers[0];
+      header.cells[0].value = 'Questão';
+      header.cells[0].style.font = headerFontStyle;
+      header.cells[1].value = 'OK';
+      header.cells[1].style.font = headerFontStyle;
+      header.cells[2].value = 'Desc NC';
+      header.cells[2].style.font = headerFontStyle;
+
+      PdfFont rowFont = grid.style.font!;
+
+      double maiorLargura = 0;
+
+      for (int i = 0; i < relatorioInspecao.respostas.length; i++) {
+        final isOK = relatorioInspecao.respostas[i].isOk;
+        PdfGridRow row = grid.rows.add();
+        final questao = relatorioInspecao.questoes[i];
+        row.cells[0].value = questao;
+        maiorLargura = rowFont.measureString(questao).width + 10 > maiorLargura
+            ? rowFont.measureString(questao).width + 10
+            : maiorLargura;
+        row.cells[0].style.font = rowFont;
+        row.cells[1].value = isOK ? 'Sim' : 'Não';
+        row.cells[1].style.font = rowFont;
+        row.cells[2].value = !isOK ? relatorioInspecao.respostas[i].dscNC : '';
+        row.cells[1].style.font = rowFont;
+      }
+
+      grid.columns[0].width = maiorLargura;
+      grid.columns[1].width = rowFont.measureString('Sim').width + 10;
+
+      grid.draw(
+        page: page,
+        bounds: Rect.fromLTWH(0, titleTotalHeight + 30, 0, 0),
       );
     } else {
       page.graphics.drawString(

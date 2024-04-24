@@ -1,6 +1,11 @@
+import 'dart:io';
+
+import 'package:file_saver/file_saver.dart';
+import 'package:flutter/services.dart';
 import 'package:inspecao_seguranca/core/models/info_inspecao.dart';
 import 'package:inspecao_seguranca/core/models/inspecao.dart';
 import 'package:inspecao_seguranca/core/models/is_usuario.dart';
+import 'package:inspecao_seguranca/core/models/plataforma.dart';
 import 'package:inspecao_seguranca/core/models/questao.dart';
 import 'package:inspecao_seguranca/core/models/relatorio_inspecao.dart';
 import 'package:inspecao_seguranca/core/models/resposta.dart';
@@ -149,6 +154,17 @@ abstract class _InspecaoControllerBase extends ControllerBase with Store {
       respostas: respostas,
     );
     final bytes = await _pdfService.relatorioInspecao(relatorio);
+    if (Plataforma.isWeb) {
+      await FileSaver.instance.saveFile(
+        name: '${relatorio.inspecao}-${relatorio.inspetor}-$data.pdf',
+        bytes: Uint8List.fromList(bytes),
+        mimeType: MimeType.pdf,
+      );
+    } else {
+      var file = File(
+          '/storage/emulated/0/Download/${relatorio.inspecao}-${relatorio.inspetor}-$data.pdf');
+      await file.writeAsBytes(bytes);
+    }
     return bytes;
   }
 }

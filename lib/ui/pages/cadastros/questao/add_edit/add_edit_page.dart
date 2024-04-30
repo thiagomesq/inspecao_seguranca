@@ -39,7 +39,7 @@ class AddEditQuestaoPage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Text(
-                      '${controller.questao == null ? 'Novo' : 'Edição de'} Checklist',
+                      '${controller.questao == null ? 'Novo' : 'Edição de'} item de Checklist',
                       style: Theme.of(context).textTheme.titleLarge,
                     ),
                     const SizedBox(height: 16),
